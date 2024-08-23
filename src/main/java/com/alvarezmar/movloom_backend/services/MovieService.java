@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.alvarezmar.movloom_backend.models.MovieImagesResponse;
 import com.alvarezmar.movloom_backend.models.NowPlayingResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,6 +28,13 @@ public class MovieService {
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
         return objectMapper.readValue(response.getBody(), NowPlayingResponse.class);
+    }
+
+    public MovieImagesResponse getMovieImages(Number id) throws Exception {
+        String url = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=" + apiKey;
+        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+
+        return objectMapper.readValue(response.getBody(), MovieImagesResponse.class);
     }
 
 }

@@ -1,9 +1,11 @@
 package com.alvarezmar.movloom_backend.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alvarezmar.movloom_backend.models.MovieImagesResponse;
 import com.alvarezmar.movloom_backend.models.NowPlayingResponse;
 import com.alvarezmar.movloom_backend.services.MovieService;
 
@@ -34,6 +36,18 @@ public class MovieController {
             return null;
         }
     }
+
+    @GetMapping("/movie-images/{id}")
+    public MovieImagesResponse getMovieImages(@PathVariable Number id) {
+        try {
+            return movieService.getMovieImages(id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
 
 /*
